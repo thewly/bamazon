@@ -25,12 +25,14 @@ connection.connect(function (err, results) {
     showAndAsk();
 });
 
-var showTableOnly = function () {
+var showTableOnly = function (orderCost) {
     connection.query(
         "SELECT * from products",
         function (err, results) {
             if (err) throw err;
             console.table(results);
+            console.log("Your order total is: " + orderCost);
+            connection.end();
         })
 };
 
@@ -73,9 +75,7 @@ var showAndAsk = function () {
                                     ],
                                     function (err, res) {
                                         console.log(res.affectedRows + " products updated!\n");
-                                        showTableOnly();
-                                        console.log("Your order total is: " + orderCost);
-                                        connection.end();
+                                        showTableOnly(orderCost);
                                     }
                                 );
                             } else {
