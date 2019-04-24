@@ -1,6 +1,5 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
-var table = require('cli-table');
 
 // create the connection information for the sql database
 var connection = mysql.createConnection({
@@ -20,7 +19,6 @@ var connection = mysql.createConnection({
 // connect to the mysql server and sql database
 connection.connect(function (err, results) {
     if (err) throw err;
-    console.log('test 1');
     // run the start function after the connection is made to prompt the user
     showAndAsk();
 });
@@ -80,59 +78,12 @@ var showAndAsk = function () {
                                 );
                             } else {
                                 console.log("insufficient quantity");
+                                showAndAsk();
                             }
                         }
                     }
-                    return;
                 }
                 );
         }
     );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// var query = "SELECT item_id,product_name,price,stock_quantity FROM products";
-//     connection.query(query, function (err, res) {
-//         var theDisplayTable = new Table({
-//             head: ['ID Number', 'Product Name', 'Depaertment Name', 'Price', 'Sotck Quantity'],
-
-//             colWidths: [10, 30, 10, 14, 14]
-//         });
-
-//         for (var i = 0; i < res.length; i++) {
-//             theDisplayTable.push(
-//                 [res[i].item_id, res[i].product_name, res[i].department_name, res[i].price, res[i].stock_quantity]
-//             );
-//         }
-//         console.log(theDisplayTable.toString());
-
-
-//         //pickProduct();
-//     });
